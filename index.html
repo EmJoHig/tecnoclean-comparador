@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Comparador de Datos TECNOCLEAN</title>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <title>DigiMedia - Creative SEO HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-digimedia-v1.css">
+    <link rel="stylesheet" href="assets/css/animated.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+    <style>
+        body {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .div-resultados {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            /* height: 400px; */
+            overflow-y: auto;
+
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        .grid-item {
+            grid-column: span 4;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+        
+    </header>
+
+
+    <!-- DATOS -->
+    <div id="contact" class="contact-us section">
+        <div class="container">
+            <!-- ARCHIVOS -->
+            <div style="margin-bottom: 50px;">
+                <h2>PROVEEDOR</h2>
+                <input type="file" id="archivoLadoA" multiple accept=".xlsx, .xls" onchange="manejarCambioArchivoA()" />
+            </div>
+            <div style="margin-bottom: 50px;">
+                <h2>MIS DATOS</h2>
+                <input type="file" id="archivoLadoB" accept=".xlsx, .xls" onchange="manejarCambioArchivoB()" />
+            </div>
+
+            <div id="div-btn-comparar" class="border-first-button" style="display: block; margin-bottom: 60px;">
+                <a href="#" onclick="compararDatos()">COMPARAR</a>
+            </div>
+            <div id="cargando" class="border-first-button" style="display: none; font-size: 40px; margin-bottom: 60px;">
+                <i class="fa fa-spinner fa-spin"></i>
+            </div>
+
+            <div class="" style="margin-bottom: 40px;">
+                <h2>Resultados</h2>
+                <div class="line-dec"></div>
+            </div>
+            <div class="accordion" id="accordionExample" >
+                <!-- LISTAS -->
+                <div class="accordion-item" id="item2-acordeon">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            BAJARON PRECIO
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <table id="tablaBajoPrecio">
+                                <thead>
+                                    <tr>
+                                        <th>NOMBRE</th>
+                                        <th>TECNOCLEAN</th>
+                                        <th>PROVEEDOR</th>
+                                        <th>PORCENTAJE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" id="item2-acordeon">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            MISMO PRECIO
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <table id="tablaMismoPrecio">
+                                <thead>
+                                    <tr>
+                                        <th>NOMBRE</th>
+                                        <th>TECNOCLEAN</th>
+                                        <th>PROVEEDOR</th>
+                                        <th>PORCENTAJE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" id="item3-acordeon">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            SUBIERON PRECIO
+                            <!-- <span>(100)</span> -->
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <table id="tablaSubioPrecio">
+                                <thead>
+                                    <tr>
+                                        <th>NOMBRE</th>
+                                        <th>TECNOCLEAN</th>
+                                        <th>PROVEEDOR</th>
+                                        <th>PORCENTAJE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright © 2024
+                        <br>Design: <a href="#" target="_parent"
+                            title="tecnoclean">Tecnoclean</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./main.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/animation.js"></script>
+    <script src="assets/js/imagesloaded.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+</body>
+</html>
