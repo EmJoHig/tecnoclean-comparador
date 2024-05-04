@@ -1,0 +1,67 @@
+/* body {
+  background: #fff;
+  color: black;
+}
+
+.navbar-brand {
+  font-family: 'Spicy Rice', cursive;
+  font-size: 1.5rem;
+}
+
+.nav-link {
+  text-transform: uppercase;
+  font-family: 'Spicy Rice', cursive;
+}
+
+header img {
+  width: 60%;
+} */
+
+
+body {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.div-resultados {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  /* height: 400px; */
+  overflow-y: auto;
+
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.grid-item {
+  grid-column: span 4;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border: 1px solid #ccc;
+  text-align: center;
+}

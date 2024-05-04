@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        <%= title %>
+    </title>
+    <%- include("partials/head") %>
+
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet">
+
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+        <!-- Additional CSS Files -->
+        <link rel="stylesheet" href="assets/css/fontawesome.css">
+        <link rel="stylesheet" href="assets/css/templatemo-digimedia-v1.css">
+        <link rel="stylesheet" href="assets/css/animated.css">
+        <link rel="stylesheet" href="assets/css/owl.css">
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+</head>
+
+<body>
+    <%- include("partials/navigation") %>
+
+        <section>
+
+            <div id="contact" class="contact-us section">
+                <div class="container">
+                    <!-- ARCHIVOS -->
+                    <div style="margin-bottom: 50px;">
+                        <h2>PROVEEDOR</h2>
+                        <input type="file" id="archivoLadoA" accept=".xlsx, .xls, .pdf"
+                            onchange="manejarCambioArchivoA()" />
+                    </div>
+                    <div style="margin-bottom: 50px;">
+                        <h2>MIS DATOS</h2>
+                        <input type="file" id="archivoLadoB" accept=".xlsx, .xls, .pdf"
+                            onchange="manejarCambioArchivoB()" />
+                    </div>
+
+                    <div id="div-btn-comparar" class="border-first-button" style="display: block; margin-bottom: 60px;">
+                        <a href="#" onclick="compararDatos()">COMPARAR</a>
+                        <a style="margin-left: 15px; background-color: #ffc10769; color: #fff;" href="#" onclick="window.location.reload()">LIMPIAR</a>
+                    </div>
+                    <div id="cargando" class="border-first-button"
+                        style="display: none; font-size: 40px; margin-bottom: 60px;">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
+
+                    <div class="" style="margin-bottom: 40px;">
+                        <h2>Resultados</h2>
+                        <div class="line-dec"></div>
+                    </div>
+                    <div class="accordion" id="accordionExample">
+                        <!-- LISTAS -->
+                        <div class="accordion-item" id="item2-acordeon">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    BAJARON PRECIO
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <table id="tablaBajoPrecio">
+                                        <thead>
+                                            <tr>
+                                                <th>NOMBRE</th>
+                                                <th>TECNOCLEAN</th>
+                                                <th>PROVEEDOR</th>
+                                                <th>PORCENTAJE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" id="item2-acordeon">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    MISMO PRECIO
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <table id="tablaMismoPrecio">
+                                        <thead>
+                                            <tr>
+                                                <th>NOMBRE</th>
+                                                <th>TECNOCLEAN</th>
+                                                <th>PROVEEDOR</th>
+                                                <th>PORCENTAJE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" id="item3-acordeon">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    SUBIERON PRECIO
+                                    <!-- <span>(100)</span> -->
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <table id="tablaSubioPrecio">
+                                        <thead>
+                                            <tr>
+                                                <th>NOMBRE</th>
+                                                <th>TECNOCLEAN</th>
+                                                <th>PROVEEDOR</th>
+                                                <th>PORCENTAJE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include("partials/footer") %>
+
+            <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/js/owl-carousel.js"></script>
+            <script src="assets/js/animation.js"></script>
+            <script src="assets/js/imagesloaded.js"></script>
+            <script src="assets/js/custom.js"></script>
+
+            <script>
+
+                let datosLadoA = [];
+                let datosLadoB = [];
+
+                function manejarCambioArchivoA() {
+                    leerArchivo('LadoA');
+                }
+
+                function manejarCambioArchivoB() {
+                    leerArchivo('LadoB');
+                }
+
+
+                // funcion que solo carga los datos de los archivos en el array correspondiente
+                function leerArchivo(lado, callback) {
+                    const input = lado === 'LadoA' ? document.getElementById('archivoLadoA') : document.getElementById('archivoLadoB');
+                    const archivo = input.files[0];
+
+                    const formData = new FormData();
+                    formData.append('archivo', archivo);
+                    formData.append('lado', lado === 'LadoA' ? 'A' : 'B');
+
+                    fetch('/convertir-excel', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Error al subir el archivo');
+                            }
+                            // return response.text();
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.tipo === 'error') {
+                                alert(data.text);
+                            }
+                            else {
+                                if (lado === 'LadoA') {
+                                    datosLadoA = data.productos;
+                                } else {
+                                    datosLadoB = data.productos;
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+
+
+                function compararDatos() {
+                    if(datosLadoA.length <1 && datosLadoB.length < 1){
+                        alert("debe seleccionar un archivo");
+                        return;
+                    }
+                    const resultado = compararArrays(datosLadoA, datosLadoB);
+                    //AHORA CARGO LAS TABLAS
+                    const tbodyBajoPrecio = document.querySelector("#tablaBajoPrecio tbody");
+                    const tbodyMismoPrecio = document.querySelector("#tablaMismoPrecio tbody");
+                    const tbodySubioPrecio = document.querySelector("#tablaSubioPrecio tbody");
+
+                    // Llamar a la función para cargar los datos en la tabla
+                    cargarDatosEnTabla(tbodyBajoPrecio, resultado.arrayBajaPrecios);
+                    cargarDatosEnTabla(tbodyMismoPrecio, resultado.arrayMismoPrecio);
+                    cargarDatosEnTabla(tbodySubioPrecio, resultado.arraySubaPrecios);
+
+                    abrirAcordeonSubieronPrecio();
+
+                    // //oculto el cargando y muestro el boton comparar
+                    document.getElementById('cargando').style.display = 'none';
+                    document.getElementById('div-btn-comparar').style.display = 'block';
+                }
+
+
+                function compararArrays(array1, array2) {
+                    const arraySubaPrecios = [];
+                    const arrayBajaPrecios = [];
+                    const arrayMismoPrecio = [];
+                    // ARRAY ITEMS MISMO PRECIO
+                    array1.forEach(item1 => {
+                        const item2 = array2.find(item => item.nombre === item1.nombre);
+                        if (item2 && item1.precio == item2.precio) {
+                            arrayMismoPrecio.push({
+                                nombre: item1.nombre,
+                                precioNuevo: item1.precio,
+                                precioAnterior: item2.precio
+                            });
+                        }
+                    });
+                    // ARRAY ITEMS QUE SUBIERON 
+                    array1.forEach(item1 => {
+                        const item2 = array2.find(item => item.nombre === item1.nombre);
+                        if (item2 && item1.precio > item2.precio) {
+                            arraySubaPrecios.push({
+                                nombre: item1.nombre,
+                                precioNuevo: item1.precio,
+                                precioAnterior: item2.precio
+                            });
+                        }
+                    });
+                    // ARRAY ITEMS BAJARON PRECIO
+                    array1.forEach(item1 => {
+                        const item2 = array2.find(item => item.nombre === item1.nombre);
+                        if (item2 && item1.precio < item2.precio) {
+                            arrayBajaPrecios.push({
+                                nombre: item1.nombre,
+                                precioNuevo: item1.precio,
+                                precioAnterior: item2.precio
+                            });
+                        }
+                    });
+                    return {
+                        arraySubaPrecios,  //ARRAY DE ITEMS QUE SUBIERON PRECIO};
+                        arrayBajaPrecios,  //ARRAY DE ITEMS QUE BAJARON PRECIO};
+                        arrayMismoPrecio   //ARRAY DE ITEMS QUE TIENEN MISMO PRECIO};
+                    };
+                }
+
+
+                function cargarDatosEnTabla(tbody, array) {
+                    tbody.innerHTML = "";
+                    array.forEach(item => {
+                        let porcentajeVariacion = 0;
+                        if (item.precioNuevo > item.precioAnterior) {
+                            porcentajeVariacion = ((item.precioNuevo - item.precioAnterior) / item.precioAnterior) * 100; //aumento
+                        } else {
+                            porcentajeVariacion = ((item.precioAnterior - item.precioNuevo) / item.precioAnterior) * 100; //disminuyo
+                        }
+                        const row = `
+                            <tr>
+                                <td>${item.nombre}</td>
+                                <td>${item.precioAnterior}</td>
+                                <td>${item.precioNuevo}</td>
+                                <td> % ${porcentajeVariacion.toFixed(2)}</td>
+                            </tr>
+                        `;
+                        tbody.innerHTML += row;
+                    });
+                }
+
+                function abrirAcordeonSubieronPrecio() {
+                    var botonAcordeon = document.querySelector('#item3-acordeon .accordion-button');
+                    botonAcordeon.click()
+                }
+
+
+
+            </script>
+
+</body>
+
+</html>
